@@ -30,4 +30,12 @@ public class MyController {
         return "test3";
     }
 
+    @RequestMapping("/test4/{id}/{name}")
+    public String test4(@PathVariable Integer id,
+                        @PathVariable String name) {
+        System.out.println("id:" + id);
+        System.out.println("name:" + name);
+        return "test4";
+    }
+
 }
