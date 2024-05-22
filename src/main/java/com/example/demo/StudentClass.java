@@ -2,6 +2,8 @@ package com.example.demo;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class StudentClass {
     @PostMapping("/students")
-    public String Create(@RequestBody @Valid Student student){
+    public ResponseEntity<String> Create(@RequestBody @Valid Student student){
         System.out.println("student Name："+student.getName());
         System.out.println("student id："+student.getId());
-        return "Create";
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Create");
     }
 
     @GetMapping("/students/{id}")
