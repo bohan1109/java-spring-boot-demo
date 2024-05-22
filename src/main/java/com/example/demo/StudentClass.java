@@ -1,18 +1,22 @@
 package com.example.demo;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Validated
 public class StudentClass {
     @PostMapping("/students")
-    public String Create(@RequestBody Student student){
+    public String Create(@RequestBody @Valid Student student){
         System.out.println("student Name："+student.getName());
         System.out.println("student id："+student.getId());
         return "Create";
     }
 
     @GetMapping("/students/{id}")
-    public String Get(@PathVariable Integer id){
+    public String Get(@PathVariable @Min(1) Integer id){
         System.out.println("id"+id);
         return "Get";
     }
