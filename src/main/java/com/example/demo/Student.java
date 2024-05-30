@@ -1,8 +1,8 @@
 package com.example.demo;
 
 public class Student {
-    public Integer id;
-    public String name;
+    Integer id;
+    String name;
 
     public Integer getId() {
         return id;
