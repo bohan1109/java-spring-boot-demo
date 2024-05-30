@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -61,5 +62,13 @@ public class StudentController {
         map.put("studentId", studentId);
         namedParameterJdbcTemplate.update(sql,map);
         return "delete success";
+    }
+
+    @GetMapping("/students")
+    public List<Student> selectAll(){
+        String sql = "select id,name from student";
+        Map<String,Object> map = new HashMap<>();
+        List<Student> list = namedParameterJdbcTemplate.query(sql, map,new StudentRowMapper());
+        return list;
     }
 }
