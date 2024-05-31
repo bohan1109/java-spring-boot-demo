@@ -64,11 +64,16 @@ public class StudentController {
         return "delete success";
     }
 
-    @GetMapping("/students")
-    public List<Student> selectAll(){
-        String sql = "select id,name from student";
+    @GetMapping("/students/{studentId}")
+    public Student select(@PathVariable int studentId){
+        String sql = "select id,name from student where id = :studentId";
         Map<String,Object> map = new HashMap<>();
+        map.put("studentId", studentId);
         List<Student> list = namedParameterJdbcTemplate.query(sql, map,new StudentRowMapper());
-        return list;
+        if(list.size()>0){
+            return list.get(0);
+        }else {
+            return null;
+        }
     }
 }
